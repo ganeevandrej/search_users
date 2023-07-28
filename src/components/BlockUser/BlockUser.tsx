@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React, {useMemo, useState} from "react";
 import style from "./BlockUser.module.css";
 import { IUser } from "../../services/gitApiService";
+import UserDetails from "../UserDetails";
+import {Button} from "@mui/material";
 
 interface PropsBlockUser {
     user: IUser;
@@ -10,8 +12,26 @@ const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
     const { avatar_url, login, url } = user;
     const [InfoDetails, setInfoDetails] = useState(false);
 
-    const btn_more = <button onClick={() => setInfoDetails(true)}>подробнее</button>;
-    const btn_hide = <button className="hide" onClick={() => setInfoDetails(false)}>спрятать</button>;
+    const btn_more = (
+        <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setInfoDetails(true)}
+        >
+            подробнее
+        </Button>
+    );
+    const btn_hide = (
+        <Button
+            variant="outlined"
+            size="small"
+            onClick={() => setInfoDetails(false)}
+        >
+            спрятать
+        </Button>
+    );
+
+    const memoUserDetails = useMemo(() => <UserDetails login={ login } />, [url]);
 
     return (
         <div className={style.wrapper}>
@@ -19,6 +39,7 @@ const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
             <div className={style.userInfo}>
                 <span className={style.header}>{ login }</span>
                 { InfoDetails ? btn_hide : btn_more }
+                { InfoDetails && memoUserDetails}
             </div>
         </div>
     );

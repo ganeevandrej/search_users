@@ -16,9 +16,9 @@ const Sort: React.FC<PropsSort> = ({ sort, setParamSort }): React.JSX.Element =>
     return (
         <div className={style.sort}>
             <div className={style.wrapper}>
-                <Select size="small" value={sort} onChange={ handleChange } defaultValue="ascending" >
-                    <MenuItem value="ascending">по возрастанию</MenuItem>
-                    <MenuItem value="descending">по убыванию</MenuItem>
+                <Select size="small" value={sort} onChange={ handleChange } defaultValue="desc" >
+                    <MenuItem value="asc">по возрастанию</MenuItem>
+                    <MenuItem value="desc">по убыванию</MenuItem>
                 </Select>
             </div>
         </div>
