@@ -1,0 +1,16 @@
+.wrapper {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: auto;
+    padding: 20px 0;
+    border-bottom: 1px solid #d3d3d3;
+}
+
+.blockInput {
+    width: 90%;
+}
+
+.blockBtn {
+    margin-left: 20px;
+}
