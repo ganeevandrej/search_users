@@ -1,16 +1,18 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
 import style from "./Header.module.css";
+import { useNavigate } from "react-router-dom";
 
-interface PropsHeader {
-    getSearchParam: ( query: string ) => void
-}
-
-const Header: React.FC<PropsHeader> = ({ getSearchParam }): React.JSX.Element => {
+const Header: React.FC = (): React.JSX.Element => {
     const [value, setValue] = useState('');
+    const navigate = useNavigate();
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>)  => {
         setValue(event.target.value);
+    }
+
+    const clickBtn = () => {
+        !!value && navigate(`search/${value}/1`);
     }
 
     return(
@@ -27,7 +29,7 @@ const Header: React.FC<PropsHeader> = ({ getSearchParam }): React.JSX.Element =>
                 </div>
                 <div className={style.blockBtn}>
                     <Button
-                        onClick={() => getSearchParam(value) }
+                        onClick={ clickBtn }
                         variant="outlined"
                         size="large"
                     >

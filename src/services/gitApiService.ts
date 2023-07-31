@@ -4,7 +4,6 @@ export interface IUser {
     id: number;
     login: string;
     avatar_url: string;
-    url: string;
 }
 
 export interface IUserDetails {
@@ -15,38 +14,37 @@ export interface IUserDetails {
 }
 
 export class GitApiService {
+    // pagesInfo: pages = {page: 0, totalPage: 0 };
     BASE_URL = 'https://api.github.com/';
 
     getData = async (url: string) => {
         const fullUrl = this.BASE_URL + url;
-        const res = await axios.get(fullUrl, {
-            headers: {
-                Accept: "application/vnd.github+json"
-            }
-        });
+        const res = await axios.get(fullUrl);
 
         if(!res.status) {
             throw new Error(`Could not fetch ${fullUrl} received ${res.status}`);
         }
-
-        // const func = (str: string, symbol_1: string, symbol_2: string = "") => {
-        //     if(symbol_2) {
-        //         return str.slice(str.indexOf(symbol_1) + 1, str.indexOf(symbol_2));
-        //     }
-        //     return str.slice(str.indexOf(symbol_1) + 1, str.lastIndexOf(symbol_1));
-        // }
-        // const links_pages = res.headers.link.split(" ", 4);
-        // const link_1 = func(links_pages[0], '<','>');
-        // const link_2 = func(links_pages[2], '<','>');
-        // const naneLink_1 = func(links_pages[1], '"');
-        // const naneLink_2 = func(links_pages[3], '"');
         //
-        //
-        // const pages = {
-        //     [naneLink_1]: link_1,
-        //     [naneLink_2]: link_2
+        // const func = (str: string) => {
+        //     return str.slice(str.indexOf('"') + 1, str.lastIndexOf('"'));
         // }
-        // console.log(pages);
+        // const  func_2 = (str: string) => {
+        //     return str.slice(str.indexOf('<') + 1, str.indexOf('>'));
+        // }
+        // const links_pages = res.headers.link.split(",");
+        //
+        // const links_page = links_pages.map((item: string) => {
+        //     const arr = item.split(";");
+        //
+        //      return {
+        //          [func(arr[1])]: func_2(arr[0])
+        //      };
+        // })
+        //
+        // console.log(links_page);
+        //
+        // this.pagesInfo.page = Number(links_page[1].next.match("[\\b[\\d]+\\b")[0]);
+        // this.pagesInfo.totalPage = Number(links_page[2].last.match("[\\b[\\d]+\\b")[0]);
 
         return await res.data;
     }
@@ -57,8 +55,12 @@ export class GitApiService {
     }
 
     searchUsers = async (url: string) => {
-        const users = await this.getData(url);
-        return await users.items.map(this._transformUsers);
+        const data = await this.getData(url);
+        const users = await data.items.map(this._transformUsers);
+        return {
+            users,
+            total_count: data.total_count < 1000 ? Math.ceil(data.total_count / 30) : 34
+        };
     }
 
     getUserDetails = async (login: string) => {
@@ -75,11 +77,10 @@ export class GitApiService {
         }
     }
 
-    _transformUsers = ({ id, avatar_url, login, url }: IUser) => {
+    _transformUsers = ({ id, avatar_url, login }: IUser) => {
         return {
             id,
             login,
-            url,
             avatar_url,
         }
     }
