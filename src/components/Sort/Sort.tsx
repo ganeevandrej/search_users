@@ -1,7 +1,6 @@
 import React from "react";
-import style from "./Sort.module.css";
 import { Select, SelectChangeEvent, MenuItem } from "@mui/material";
-
+import style from "./Sort.module.css";
 
 interface PropsSort {
     sort: string;

@@ -1,7 +1,7 @@
 import React from "react";
-import style from "./UserList.module.css";
-import { IUser } from "../../services/gitApiService";
 import BlockUser from "../BlockUser";
+import { IUser } from "../../services/gitApiService";
+import style from "./UserList.module.css";
 
 interface PropsUserList {
     users: IUser[];

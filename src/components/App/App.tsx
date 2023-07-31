@@ -5,15 +5,13 @@ import Header from "../Header";
 import Home from "../Home";
 import Search from "../Search";
 
-import style from './App.module.css';
-
 const App: React.FC = (): React.JSX.Element => {
     return (
-        <div className={style.wrapper}>
-            <Header  />
+        <div>
+            <Header />
             <Routes>
-                <Route path="/" element={<Home />} />
-                <Route path="search/:query/:page" element={<Search />} />
+                <Route path="/" element={ <Home /> } />
+                <Route path="search/:query/:page" element={ <Search /> } />
             </Routes>
         </div>
     );

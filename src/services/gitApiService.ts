@@ -14,7 +14,6 @@ export interface IUserDetails {
 }
 
 export class GitApiService {
-    // pagesInfo: pages = {page: 0, totalPage: 0 };
     BASE_URL = 'https://api.github.com/';
 
     getData = async (url: string) => {
@@ -24,27 +23,6 @@ export class GitApiService {
         if(!res.status) {
             throw new Error(`Could not fetch ${fullUrl} received ${res.status}`);
         }
-        //
-        // const func = (str: string) => {
-        //     return str.slice(str.indexOf('"') + 1, str.lastIndexOf('"'));
-        // }
-        // const  func_2 = (str: string) => {
-        //     return str.slice(str.indexOf('<') + 1, str.indexOf('>'));
-        // }
-        // const links_pages = res.headers.link.split(",");
-        //
-        // const links_page = links_pages.map((item: string) => {
-        //     const arr = item.split(";");
-        //
-        //      return {
-        //          [func(arr[1])]: func_2(arr[0])
-        //      };
-        // })
-        //
-        // console.log(links_page);
-        //
-        // this.pagesInfo.page = Number(links_page[1].next.match("[\\b[\\d]+\\b")[0]);
-        // this.pagesInfo.totalPage = Number(links_page[2].last.match("[\\b[\\d]+\\b")[0]);
 
         return await res.data;
     }
