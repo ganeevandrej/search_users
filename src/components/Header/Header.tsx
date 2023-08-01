@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, TextField } from "@mui/material";
-import style from "./Header.module.css";
 import { useNavigate } from "react-router-dom";
+import style from "./Header.module.css";
 
 const Header: React.FC = (): React.JSX.Element => {
     const [value, setValue] = useState('');

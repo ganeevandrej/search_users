@@ -1,9 +1,8 @@
-import React, { memo, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./BlockUser.module.css";
 import {GitApiService, IUser, IUserDetails} from "../../services/gitApiService";
 import UserDetails from "../UserDetails";
-import {Button} from "@mui/material";
-import Spinner from "../Spinner";
+import { Button } from "@mui/material";
 
 interface PropsBlockUser {
     user: IUser;
@@ -11,7 +10,6 @@ interface PropsBlockUser {
 
 const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
     const [InfoDetails, setInfoDetails] = useState<boolean>(false);
-    const [load, setLoad] = useState<boolean>(true);
     const [details, setDetails] = useState<IUserDetails>({
         name: "",
         followers: 0,
@@ -29,7 +27,6 @@ const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
                     console.log(user);
                     setDetails(user)
                 })
-            setLoad(false);
         }
     }, [InfoDetails]);
 
@@ -42,14 +39,12 @@ const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
             подробнее
         </Button>
     );
+
     const btn_hide = (
         <Button variant="outlined" size="small" onClick={clickBtn}>
             спрятать
         </Button>
     );
-
-    const MemoUserDetails = memo(UserDetails);
-    const isLoaded = load ? <Spinner /> : <MemoUserDetails details={details} />;
 
     return (
         <div className={style.wrapper}>
@@ -57,7 +52,7 @@ const BlockUser: React.FC<PropsBlockUser> = ({ user }): React.JSX.Element => {
             <div className={style.userInfo}>
                 <span className={style.header}>{ login }</span>
                 { InfoDetails ? btn_hide : btn_more }
-                { InfoDetails && isLoaded }
+                { InfoDetails && <UserDetails details={details} /> }
             </div>
         </div>
     );
