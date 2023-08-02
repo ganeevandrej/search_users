@@ -18,8 +18,13 @@ export interface IUserDetailsResponse {
 }
 
 export interface ISearchResponse {
-    users: IUser[],
+    items: IUserResponse[],
     total_count: number
+}
+
+export interface ISearch {
+    users: IUser[],
+    totalCount: number
 }
 
 export interface IUserDetails {
@@ -30,14 +35,9 @@ export interface IUserDetails {
 }
 
 export interface IGitApiService {
-    BASE_URL: string,
-    getData: (url: string) => Promise<any>,
     getUsers: () => Promise<IUser[]>,
-    searchUsers: (query: string, page: number, sort: string) => Promise<ISearchResponse>,
+    searchUsers: (query: string, page: number, sort: string) => Promise<ISearch>,
     getUserDetails: (login: string) => Promise<IUserDetails>,
-    _transformUsersDetails: (data: IUserDetailsResponse) => IUserDetails,
-    _transformUsers: (data: IUserResponse) => IUser,
-    getTotalPage: (data: ISearchResponse) => number
 }
 
 export interface HomeProps {
@@ -49,7 +49,7 @@ export interface PropsUserList {
 }
 
 export interface SearchBlockProps {
-    getData: (query: string, page: number, sort: string) => Promise<ISearchResponse>
+    getData: (query: string, page: number, sort: string) => Promise<ISearch>
 }
 
 export interface PropsSort {

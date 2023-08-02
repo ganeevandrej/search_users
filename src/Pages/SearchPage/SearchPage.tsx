@@ -24,9 +24,9 @@ export const SearchBlock: React.FC<SearchBlockProps> = ({getData}): React.JSX.El
         const searchUsers = async () => {
             try {
                 setLoad(true);
-                const {users, total_count} = await getData(query, Number(page), sort);
+                const {users, totalCount} = await getData(query, Number(page), sort);
                 setUsers(users);
-                setTotalPage(total_count);
+                setTotalPage(totalCount);
                 setError(false);
             } catch (e) {
                 setError(true);
@@ -38,17 +38,18 @@ export const SearchBlock: React.FC<SearchBlockProps> = ({getData}): React.JSX.El
         searchUsers()
     }, [query, page, sort, getData]);
 
-    const renderSearchBlock = (
+    const isLoad = load ? <Spinner /> : <UserList users={users} />;
+    const isError = error ? <Error /> : isLoad;
+
+    return (
         <div>
             <Sort value={sort} onChange={setParamSort} />
-            <UserList users={users} />
+            {isError}
             <SearchPagination
-                query={query}
-                page={Number(page)}
-                totalPage={totalPage}
+            query={query}
+            page={Number(page)}
+            totalPage={totalPage ?? 1 }
             />
         </div>
     );
-
-    return error ? <Error /> : load ? <Spinner /> : renderSearchBlock;
 }

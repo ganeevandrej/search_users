@@ -12,7 +12,7 @@ export const Header: React.FC = (): React.JSX.Element => {
     }
 
     const clickBtn = () => {
-        !!value && navigate(`search/${value}/1`);
+        Boolean(value) && navigate(`search/${value}/1`);
     }
 
     return(

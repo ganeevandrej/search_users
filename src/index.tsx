@@ -7,7 +7,7 @@ import {GitApiService} from "./services/gitApiService";
 import {App} from './App';
 import './index.css';
 
-const gitApiService: IGitApiService = new GitApiService();
+export const gitApiService: IGitApiService = new GitApiService();
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement

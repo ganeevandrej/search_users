@@ -3,13 +3,12 @@ import {Button} from "@mui/material";
 import {UserDetails} from "../UserDetails";
 import {Spinner} from "../Spinner";
 import {Error} from "../Error";
-import {initialDetailsUser} from "../../services/constants";
 import {IUserDetails, UserBlockProps} from "../../services/interfaces";
 import style from "./User.module.css";
 
 export const UserBlock: React.FC<UserBlockProps> = ({user, getData}): React.JSX.Element => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
-    const [details, setDetails] = useState<IUserDetails>(initialDetailsUser);
+    const [details, setDetails] = useState<IUserDetails| null>(null);
     const [error, setError] = useState<boolean>(false);
     const [load, setLoad] = useState<boolean>(false);
     const {avatarUrl, login} = user;
@@ -34,7 +33,7 @@ export const UserBlock: React.FC<UserBlockProps> = ({user, getData}): React.JSX.
         setShowDetails((prevState) => !prevState);
     };
 
-    const renderSearchBlock = showDetails && <UserDetails details={details} />
+    const renderSearchBlock = showDetails && details && <UserDetails details={details} />
 
     return (
         <div className={style.wrapper}>

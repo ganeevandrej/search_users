@@ -26,11 +26,12 @@ export const Home: React.FC<HomeProps> = ({getData}): React.JSX.Element => {
         getUsers()
     }, [getData]);
 
-    const userList = users.length !== 0 && <UserList users={users} />;
+    if(load) return <Spinner />;
+    if(error) return <Error />
 
     return (
         <>
-            {error ? <Error /> : load ? <Spinner /> : userList}
+            {users.length !== 0 && <UserList users={users} />}
         </>
     );
 }
