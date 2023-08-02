@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from "react";
+import {Button, TextField} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 import style from "./Header.module.css";
 
-const Header: React.FC = (): React.JSX.Element => {
+export const Header: React.FC = (): React.JSX.Element => {
     const [value, setValue] = useState('');
     const navigate = useNavigate();
 
@@ -40,5 +40,3 @@ const Header: React.FC = (): React.JSX.Element => {
         </header>
     );
 }
-
-export default Header;

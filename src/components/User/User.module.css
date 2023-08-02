@@ -17,6 +17,10 @@
     margin-left: 15px;
 }
 
+.blockBtn {
+    justify-self: left;
+}
+
 .header {
     display: inline-block;
     font-weight: bold;

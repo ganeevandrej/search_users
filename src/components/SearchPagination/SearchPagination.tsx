@@ -2,21 +2,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Pagination, PaginationItem } from "@mui/material";
 import styles from "./SearchPagination.module.css";
+import {PropsSearchPagination} from "../../services/interfaces";
 
-interface PropsSearchPagination {
-    totalPage: number;
-    page: string;
-    query: string;
-}
-
-const SearchPagination: React.FC<PropsSearchPagination> =
-    ({ totalPage, page, query }): React.JSX.Element => {
+export const SearchPagination: React.FC<PropsSearchPagination> = (
+    {
+        totalPage,
+        page,
+        query
+    }
+): React.JSX.Element => {
     return (
         <div className={styles.blockPagination}>
             {
-                !!totalPage && (
+                Boolean(totalPage) && (
                     <Pagination
-                        page={page ? +page : 1}
+                        page={page}
                         size="large"
                         count={totalPage}
                         renderItem={(item) => (
@@ -32,5 +32,3 @@ const SearchPagination: React.FC<PropsSearchPagination> =
         </div>
     );
 }
-
-export default SearchPagination;

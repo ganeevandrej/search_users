@@ -1,17 +1,11 @@
 import axios from "axios";
-
-export interface IUser {
-    id: number;
-    login: string;
-    avatar_url: string;
-}
-
-export interface IUserDetails {
-    name: string,
-    public_repos: number;
-    followers: number;
-    following: number;
-}
+import {
+    IUserDetailsResponse,
+    ISearchResponse,
+    IUserResponse,
+    IUserDetails,
+    IUser
+} from "./interfaces";
 
 export class GitApiService {
     BASE_URL = 'https://api.github.com/';
@@ -24,42 +18,50 @@ export class GitApiService {
             throw new Error(`Could not fetch ${fullUrl} received ${res.status}`);
         }
 
-        return await res.data;
+        return res.data;
     }
 
-    getUsers = async () => {
+    getUsers = async (): Promise<IUser[]> => {
         const users = await this.getData("users");
-        return await users.map(this._transformUsers);
+        return users.map(this._transformUsers);
     }
 
-    searchUsers = async (url: string) => {
-        const data = await this.getData(url);
-        const users = await data.items.map(this._transformUsers);
+    searchUsers = async (query: string, page: number, sort: string): Promise<ISearchResponse> => {
+        const data = await this.getData(this.createUrlSearchUsers(query, page, sort));
+        const users: IUser[] = data.items.map(this._transformUsers);
         return {
             users,
-            total_count: data.total_count < 1000 ? Math.ceil(data.total_count / 30) : 34
+            total_count: this.getTotalPage(data)
         };
     }
 
-    getUserDetails = async (login: string) => {
+    getUserDetails = async (login: string): Promise<IUserDetails> => {
         const user = await this.getData("users/" + login);
         return this._transformUsersDetails(user);
     }
 
-    _transformUsersDetails = ({ name, public_repos, followers, following }: IUserDetails ) => {
+    _transformUsersDetails = ({ name, public_repos, followers, following }: IUserDetailsResponse ) => {
         return {
             name,
-            public_repos,
             followers,
-            following
+            following,
+            publicRepos: public_repos,
         }
     }
 
-    _transformUsers = ({ id, avatar_url, login }: IUser) => {
+    _transformUsers = ({ id, avatar_url, login }: IUserResponse) => {
         return {
             id,
             login,
-            avatar_url,
+            avatarUrl: avatar_url,
         }
+    }
+
+    getTotalPage = ({total_count}: ISearchResponse ): number => {
+        return total_count < 1000 ? Math.ceil(total_count / 30) : 34;
+    }
+
+    createUrlSearchUsers = (query: string, page: number, sort: string) => {
+        return `search/users?q=${query}&page=${page}&sort=repositories&order=${sort}`;
     }
 }

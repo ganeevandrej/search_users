@@ -1,24 +1,20 @@
 import React from "react";
 import style from "./UserDetails.module.css";
-import {IUserDetails} from "../../services/gitApiService";
+import {PropsRow, PropsUserDetails} from "../../services/interfaces";
 
-
-
-interface PropsUserDetails {
-    details: IUserDetails;
+const Row: React.FC<PropsRow> = ({label, value}): React.JSX.Element => {
+    return <span>{label}: <span>{value}</span></span>;
 }
 
-const UserDetails: React.FC<PropsUserDetails> = ({ details }): React.JSX.Element => {
-    const { name, followers, following, public_repos } = details;
+export const UserDetails: React.FC<PropsUserDetails> = ({details}): React.JSX.Element => {
+    const {name, followers, following, publicRepos} = details;
 
     return (
         <div className={style.wrapper}>
-            <span>Имя: <span>{name}</span></span>
-            <span>Подписчиков: <span>{followers}</span></span>
-            <span>Подпискок: <span>{following}</span></span>
-            <span>Репозиториев: <span>{public_repos}</span></span>
+            <Row label="Имя" value={name} />
+            <Row label="Подписчиков" value={followers} />
+            <Row label="Подпискок" value={following} />
+            <Row label="Репозиториев" value={publicRepos} />
         </div>
     );
 }
-
-export default UserDetails;

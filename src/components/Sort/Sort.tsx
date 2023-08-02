@@ -1,27 +1,22 @@
 import React from "react";
-import { Select, SelectChangeEvent, MenuItem } from "@mui/material";
+import {Select, SelectChangeEvent, MenuItem} from "@mui/material";
 import style from "./Sort.module.css";
+import {SortRotation} from "../../services/constants";
+import {PropsSort} from "../../services/interfaces";
 
-interface PropsSort {
-    sort: string;
-    setParamSort: (select: string) => void
-}
-
-const Sort: React.FC<PropsSort> = ({ sort, setParamSort }): React.JSX.Element => {
-    const handleChange = (event: SelectChangeEvent<typeof sort>)  => {
-        setParamSort(event.target.value);
+export const Sort: React.FC<PropsSort> = ({value, onChange}): React.JSX.Element => {
+    const handleChange = (event: SelectChangeEvent<typeof value>)  => {
+        onChange(event.target.value);
     }
 
     return (
         <div className={style.sort}>
             <div className={style.wrapper}>
-                <Select size="small" value={sort} onChange={ handleChange } defaultValue="desc" >
-                    <MenuItem value="asc">по возрастанию</MenuItem>
-                    <MenuItem value="desc">по убыванию</MenuItem>
+                <Select size="small" value={value} onChange={handleChange} defaultValue={SortRotation.DESC} >
+                    <MenuItem value={SortRotation.ASC}>по возрастанию</MenuItem>
+                    <MenuItem value={SortRotation.DESC}>по убыванию</MenuItem>
                 </Select>
             </div>
         </div>
     );
 }
-
-export default Sort;

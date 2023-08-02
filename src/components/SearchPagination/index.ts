@@ -1,1 +1,1 @@
-export { default } from "./SearchPagination";
+export { SearchPagination } from "./SearchPagination";

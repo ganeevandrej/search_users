@@ -1,0 +1,1 @@
+export { SearchPage } from "../../components/sw-component/sw-components";

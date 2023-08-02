@@ -1,24 +1,18 @@
 import React from "react";
-import BlockUser from "../BlockUser";
-import { IUser } from "../../services/gitApiService";
+import {PropsUserList} from "../../services/interfaces";
+import {User} from "../sw-component/sw-components";
 import style from "./UserList.module.css";
 
-interface PropsUserList {
-    users: IUser[];
-}
-
-const UserList: React.FC<PropsUserList> = ({ users }): React.JSX.Element => {
+export const UserList: React.FC<PropsUserList> = ({ users }): React.JSX.Element => {
     return (
         <div className={style.wrapper}>
             <div className={style.blockUsers}>
                 {
-                    users && users.map((user) => {
-                        return <BlockUser user={ user } key={ user.id } />;
+                    users.map((user) => {
+                        return <User user={user} key={user.id} />;
                     })
                 }
             </div>
         </div>
     );
 }
-
-export default UserList;
