@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {Button} from "@mui/material";
 import {UserDetails} from "../UserDetails";
+import {Spinner} from "../Spinner";
+import {Error} from "../Error";
 import {initialDetailsUser} from "../../services/constants";
 import {IUserDetails, UserBlockProps} from "../../services/interfaces";
 import style from "./User.module.css";
-import {Spinner} from "../Spinner";
 
 export const UserBlock: React.FC<UserBlockProps> = ({user, getData}): React.JSX.Element => {
     const [showDetails, setShowDetails] = useState<boolean>(false);
@@ -45,7 +46,7 @@ export const UserBlock: React.FC<UserBlockProps> = ({user, getData}): React.JSX.
                         { showDetails ? "спрятать" : "подробнее" }
                     </Button>
                 </div>
-                {load ? <Spinner /> : renderSearchBlock}
+                {error ? <Error /> : load ? <Spinner /> : renderSearchBlock}
             </div>
         </div>
     );

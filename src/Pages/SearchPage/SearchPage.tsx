@@ -6,6 +6,7 @@ import {SearchPagination} from "../../components/SearchPagination";
 import {DEFAULT_PAGE, DEFAULT_QUERY, SortRotation} from "../../services/constants";
 import {IUser, SearchBlockProps} from "../../services/interfaces";
 import {Spinner} from "../../components/Spinner";
+import {Error} from "../../components/Error";
 
 export const SearchBlock: React.FC<SearchBlockProps> = ({getData}): React.JSX.Element => {
     const [users, setUsers] = useState<IUser[]>([]);
@@ -49,5 +50,5 @@ export const SearchBlock: React.FC<SearchBlockProps> = ({getData}): React.JSX.El
         </div>
     );
 
-    return load ? <Spinner /> : renderSearchBlock;
+    return error ? <Error /> : load ? <Spinner /> : renderSearchBlock;
 }

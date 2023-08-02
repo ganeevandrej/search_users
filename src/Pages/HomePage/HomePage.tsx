@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {UserList} from "../../components/UserList";
 import {HomeProps, IUser} from "../../services/interfaces";
 import {Spinner} from "../../components/Spinner";
+import {Error} from "../../components/Error";
 
 export const Home: React.FC<HomeProps> = ({getData}): React.JSX.Element => {
     const [users, setUsers] = useState<IUser[]>([]);
@@ -29,7 +30,7 @@ export const Home: React.FC<HomeProps> = ({getData}): React.JSX.Element => {
 
     return (
         <>
-            {load ? <Spinner /> : userList}
+            {error ? <Error /> : load ? <Spinner /> : userList}
         </>
     );
 }

@@ -1,0 +1,12 @@
+.error{
+    color: #D8000C;
+    background-color: #FFBABA;
+    background-image: url('https://i.imgur.com/GnyDvKN.png');
+    background-repeat: no-repeat;
+    padding-top: 5px;
+    padding-left: 35px;
+    height: 28px;
+    width: 68%;
+    margin: 20px auto;
+    border-radius: 5px;
+}
