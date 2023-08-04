@@ -41,7 +41,7 @@ export const UserBlock: React.FC<UserBlockProps> = ({user, getData}): React.JSX.
             <div className={style.userInfo}>
                 <span className={style.header}>{login}</span>
                 <div className={style.blockBtn}>
-                    <Button variant="outlined" size="small" onClick={clickBtn}>
+                    <Button data-testid="btn" variant="outlined" size="small" onClick={clickBtn}>
                         { showDetails ? "спрятать" : "подробнее" }
                     </Button>
                 </div>

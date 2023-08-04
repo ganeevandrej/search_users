@@ -1,6 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { Pagination, PaginationItem } from "@mui/material";
+import {Link} from "react-router-dom";
+import {Pagination, PaginationItem} from "@mui/material";
 import styles from "./SearchPagination.module.css";
 import {PropsSearchPagination} from "../../services/interfaces";
 

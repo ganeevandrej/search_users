@@ -12,9 +12,14 @@ export const Sort: React.FC<PropsSort> = ({value, onChange}): React.JSX.Element 
     return (
         <div className={style.sort}>
             <div className={style.wrapper}>
-                <Select size="small" value={value} onChange={handleChange} defaultValue={SortRotation.DESC} >
-                    <MenuItem value={SortRotation.ASC}>по возрастанию</MenuItem>
-                    <MenuItem value={SortRotation.DESC}>по убыванию</MenuItem>
+                <Select
+                    data-testid="select"
+                    size="small"
+                    value={value}
+                    onChange={handleChange}
+                    defaultValue={SortRotation.DESC}>
+                    <MenuItem data-testid="asc" value={SortRotation.ASC}>по возрастанию</MenuItem>
+                    <MenuItem data-testid="desc" value={SortRotation.DESC}>по убыванию</MenuItem>
                 </Select>
             </div>
         </div>

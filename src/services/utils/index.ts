@@ -7,3 +7,4 @@ export const getTotalPage = (totalCount: number): number => {
 export const createUrlSearchUsers = (query: string, page: number, sort: string): string => {
     return `search/users?q=${query}&page=${page}&sort=repositories&order=${sort}`;
 }
+

@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Testing the Sort component snapshot of open select 1`] = `
+<ul
+  class="MuiList-root MuiList-padding MuiMenu-list css-6hp17o-MuiList-root-MuiMenu-list"
+  role="listbox"
+  tabindex="-1"
+>
+  <li
+    aria-selected="false"
+    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters MuiMenuItem-root MuiMenuItem-gutters css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+    data-testid="asc"
+    data-value="asc"
+    role="option"
+    tabindex="-1"
+  >
+    по возрастанию
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </li>
+  <li
+    aria-selected="true"
+    class="MuiButtonBase-root MuiMenuItem-root MuiMenuItem-gutters Mui-selected MuiMenuItem-root MuiMenuItem-gutters Mui-selected css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root"
+    data-testid="desc"
+    data-value="desc"
+    role="option"
+    tabindex="0"
+  >
+    по убыванию
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </li>
+</ul>
+`;

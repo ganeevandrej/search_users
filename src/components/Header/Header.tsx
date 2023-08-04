@@ -20,6 +20,7 @@ export const Header: React.FC = (): React.JSX.Element => {
             <div className={style.wrapper}>
                 <div className={style.blockInput}>
                     <TextField
+                        data-testid="input"
                         value={value}
                         onChange={ handleChange }
                         label="Введите login"
